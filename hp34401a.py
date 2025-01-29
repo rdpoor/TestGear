@@ -62,7 +62,10 @@ class HP34401A(HpCommon):
 
     def read_frequency(self):
         resp = self.query(b'MEAS:FREQ?\n')
-        return float(resp)
+        try:
+            return float(resp)
+        except ValueError:
+            return 0.0
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
